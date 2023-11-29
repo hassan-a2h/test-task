@@ -1,8 +1,10 @@
 import usersData from './assets/users_data';
+import { Link } from 'react-router-dom';
 
 const Users = () => {
   return (
     <>
+      <Link to='new_user'>Sign up</Link>
       {
         usersData &&
         usersData.map((user, index) => {
