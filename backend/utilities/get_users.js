@@ -1,7 +1,7 @@
 const users = require('../../src/assets/users.cjs');
 
-function getUsers(req, res) {
-  res.json(users);
+function getUsers(request, response) {
+  response.json(users);
 }
 
 module.exports = getUsers;

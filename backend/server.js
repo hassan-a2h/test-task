@@ -9,8 +9,8 @@ const PORT = 3000;
 app.use(express.json());
 
 // root route
-app.get('/', (req, res) => {
-  res.send('Get the server going');
+app.get('/', (request, response) => {
+  response.send('Get the server going');
 });
 
 // Endpoint to retrieve user data
