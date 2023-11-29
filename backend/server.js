@@ -1,40 +1,25 @@
 const express = require('express');
-const isValidEmail = require('./utilities/email_validator');
+const getUsers = require('./utilities/get_users');
+const addUser = require('./utilities/add_user');
 
 const app = express();
 const PORT = 3000;
 
-const users = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', role: 'user' },
-  { id: 2, name: 'Jane Doe', email: 'jane@example.com', role: 'admin' },
-  // Add more sample users as needed
-];
-
+// Use default middleware to parse data
 app.use(express.json());
 
+// root route
 app.get('/', (req, res) => {
   res.send('Get the server going');
 });
 
-app.get('/users', (req, res) => {
-  res.json(users);
-});
+// Endpoint to retrieve user data
+app.get('/users', getUsers);
 
-app.post('/users', (req, res) => {
-  const newUser = req.body;
+// Endpoint to add new user
+app.post('/users', addUser);
 
-  // Simple server-side validation for the email field
-  if (!newUser || !newUser.email || !isValidEmail(newUser.email) || !newUser.name) {
-    return res.status(400).json({ error: 'Invalid user data' });
-  }
-
-  newUser.id = users.length + 1;
-  users.push(newUser);
-
-  console.log('New user added:', newUser);
-  res.json(newUser);
-});
-
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server running at port ${PORT}`);
 });
