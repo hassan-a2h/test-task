@@ -1,8 +1,19 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usersData from '../assets/users_data';
 
 const Form = () => {
   const navigate = useNavigate();
+
+
+  // For
+  //      Error
+  //             Handling
+  const [errors, setErrors] = useState({});
+
+
+  // To add
+  //        new User
 
   const addUser = async (e) => {
     e.preventDefault();
@@ -16,6 +27,27 @@ const Form = () => {
       name: name.value,
       role: role.value,
     };
+
+    // Regex patterns for email and name validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const nameRegex = /^[a-zA-Z\s]*$/;
+
+    if (!newUser.email || !emailRegex.test(newUser.email)) {
+      setErrors({
+        email: 'Invalid email address',
+      });
+      return;
+    }
+
+    // Validate name
+    if (!newUser.name || !nameRegex.test(newUser.name)) {
+      setErrors({
+        ...errors,
+        name: 'Invalid name',
+      });
+      return;
+    }
+
 
     // Update the array
     usersData.push(newUser);
@@ -32,11 +64,13 @@ const Form = () => {
 
       <div>
         <form action="">
+          {errors.email && <div className="error">{errors.email}</div>}
           <label htmlFor="email">Email</label> <br />
           <input type="email" name="email" id="email" placeholder="user@email.com" />
           <br />
           <br />
 
+          {errors.name && <div className="error">{errors.name}</div>}
           <label htmlFor="name">Name</label> <br />
           <input id="name" name="name" type="text" placeholder="Ahmad Adnan" />
           <br />
