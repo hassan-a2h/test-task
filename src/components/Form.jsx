@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usersData from '../assets/users_data';
+import '../assets/styles.css';
 
 const Form = () => {
   const navigate = useNavigate();
@@ -42,7 +43,6 @@ const Form = () => {
     // Validate name
     if (!newUser.name || !nameRegex.test(newUser.name)) {
       setErrors({
-        ...errors,
         name: 'Invalid name',
       });
       return;
@@ -59,24 +59,24 @@ const Form = () => {
 
 
   return (
-    <>
+    <div className='signup-form'>
       <h1>User signup</h1>
 
       <div>
         <form action="">
           {errors.email && <div className="error">{errors.email}</div>}
-          <label htmlFor="email">Email</label> <br />
+          <label htmlFor="email">Email</label>
           <input type="email" name="email" id="email" placeholder="user@email.com" />
           <br />
           <br />
 
           {errors.name && <div className="error">{errors.name}</div>}
-          <label htmlFor="name">Name</label> <br />
+          <label htmlFor="name">Name</label>
           <input id="name" name="name" type="text" placeholder="Ahmad Adnan" />
           <br />
           <br />
 
-          <label htmlFor="role">Role</label> <br />
+          <label htmlFor="role">Role</label>
           <select name="role" id="role">
             <option value="user" selected>User</option>
             <option value="admin">Admin</option>
@@ -84,11 +84,12 @@ const Form = () => {
           </select>
           <br />
           <br />
+          <br />
 
           <button onClick={addUser} type="submit">Submit</button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
