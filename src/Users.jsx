@@ -13,7 +13,7 @@ const Users = () => {
   };
 
   return (
-    <>
+    <div className='main-container'>
       <div className='new-user'>
         <Link to='new_user' className='create-user'>Create User</Link>
       </div>
@@ -33,7 +33,7 @@ const Users = () => {
           })
         }
       </div>
-    </>
+    </div>
   )
 };
 

@@ -27,6 +27,12 @@
   background-color: rgb(122, 27, 27);
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .signup-form {
   max-width: 400px;
   margin: 0 auto;
